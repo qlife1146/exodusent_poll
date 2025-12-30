@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>라이브 투표</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-top">
+          <span class="badge">LIVE POLL</span>
+        </div>
+        <h1>좋아하는 음식을 골라주세요.</h1>
+        <p>투표하고 바로 결과를 확인하세요. 언제든 선택을 변경할 수 있습니다.</p>
+      </header>
+
+      <main class="card">
+        <section class="vote" aria-label="투표하기">
+          <h2>투표하기</h2>
+          <form id="vote-form">
+            <div id="options" class="options" role="radiogroup" aria-live="polite"></div>
+            <button type="submit" class="primary">투표 / 변경</button>
+          </form>
+          <div class="meta">
+            <span id="status" class="status">선택 후 버튼을 눌러주세요.</span>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>서버에 저장되며 새로고침·재접속 후에도 유지됩니다.</span>
+      </footer>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>투표 결과</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-top">
+          <span class="badge">RESULT</span>
+          <span class="timestamp" id="updated-at">업데이트 대기 중</span>
+        </div>
+        <h1>지금까지의 투표 결과</h1>
+        <p>실시간으로 갱신되는 결과입니다. 내 선택은 강조 표시됩니다.</p>
+      </header>
+
+      <main class="card">
+        <section class="snapshot" aria-label="투표 결과">
+          <div class="section-title">
+            <h3>득표 현황</h3>
+            <span id="total-count" class="total-count">0표</span>
+          </div>
+          <div id="results" class="results"></div>
+        </section>
+
+        <section class="cta" aria-label="다시 투표하기">
+          <h2>다시 참여하시겠어요?</h2>
+          <p>언제든지 선택을 바꾸고 결과에 반영할 수 있습니다.</p>
+          <a class="primary" href="/">투표 바꾸러 가기</a>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>POST로 투표하고 GET으로 결과를 가져옵니다.</span>
+      </footer>
+    </div>
+
+    <script src="/result.js" defer></script>
+  </body>
+</html>
