@@ -1,0 +1,149 @@
+투표 사이트를 만들 겁니다.
+투표 페이지와 결과 페이지가 있어야 하며, 결과 페이지는 /result.
+서버에 저장하며 투표는 POST로 조회는 GET으로 하길 원합니다.
+
+
+투표/결과 페이지와 API를 Express로 구성하고, data.json에 영구 저장되도록 구현했습니다. 쿠키 기반 1인 1표(변경 가능)와 간단한 레이트 리밋으로 어뷰징을 완화했습니다.
+
+server.js에 POST /api/vote, GET /api/results, /result 라우트와 쿠키 기반 투표자 식별/저장 로직 추가
+data.json에 옵션/투표 상태를 저장해 새로고침·서버 재시작 후에도 결과 유지
+index.html과 result.html에 투표/결과 UI 구성, /result 페이지 분리
+app.js와 result.js에서 결과 조회/렌더링/재투표 처리 및 8초 간격 갱신
+styles.css에 색상 변수/그라디언트/애니메이션 포함한 레이아웃과 상태 색상 처리
+package.json에 Express 의존성과 실행 스크립트 추가
+다음 단계 제안:
+
+npm install
+npm start (기본 http://localhost:3000)
+투표 항목을 바꾸려면 data.json의 options를 수정하세요
+테스트/실행은 아직 하지 않았어요.
+
+1 file changed
+Undo
+
+Review
+styles.css
++12
+-0
+
+data.json
+3-10
+id 값을 영어 표기법에 맞게 수정해 주세요
+
+
+data.json의 id를 영어 표기법으로 수정했습니다: jjajangmyeon, jjamppong.
+
+1 file changed
+Undo
+
+Review
+data.json
++2
+-2
+data.json에서 수정한대로 투표, 결과 페이지에 반영해주세요
+
+
+data.json 변경에 맞춰 기본 옵션도 반영했습니다. 이제 투표/결과 페이지가 짜장면, 짬뽕으로 표시됩니다.
+
+업데이트: server.js의 DEFAULT_OPTIONS 수정
+필요하면 서버 재시작만 해주세요.
+
+1 file changed
+Undo
+
+Review
+server.js
++2
+-3
+투표 현황은 결과 페이지에서만 보이게 옮겨주세요.
+
+
+투표 현황은 결과 페이지에서만 보이게 옮겨주세요. 결과 페이지는 따로 있어야 하며 링크는 /result입니다.
+
+
+투표 페이지에서는 현황(득표수/퍼센트) 노출을 없애고, 결과 페이지(/result)에만 표시되도록 옮겼습니다.
+
+index.html에서 현재 결과 섹션과 업데이트 타임스탬프 제거
+app.js에서 결과 렌더링/주기 갱신 제거, 옵션에 “선택됨”만 표시
+다음 단계:
+
+서버가 실행 중이면 페이지 새로고침
+서버를 재시작했다면 /와 /result에서 동작 확인
+2 files changed
++1
+-62
+Undo
+
+Review
+app.js
++1
+-53
+index.html
++0
+-9
+
+index.html
+19-31
+결과 페이지로 가는 버튼은 없애고 투표/변경을 누르면 /restult로 이동되게 해야 합니다.
+
+
+투표 페이지의 결과 링크를 제거하고, 투표/변경 성공 후 /restult로 이동하도록 바꿨습니다. /restult 요청은 /result로 리다이렉트되게 해두었습니다.
+
+링크 제거: index.html
+투표 성공 후 이동: app.js
+/restult 리다이렉트 추가: server.js
+원하시는 경로가 /result인지 /restult인지 확정되면 알려주세요. 맞춰서 정리해둘게요.
+
+3 files changed
++5
+-1
+Undo
+
+Review
+app.js
++1
+-0
+index.html
++0
+-1
+server.js
++4
+-0
+투표 / 변경 버튼을 누르면 결과 페이지가 보이게 해주세요
+
+
+투표/변경 버튼 클릭 후 결과 페이지(/result)로 이동되도록 이미 설정돼 있어서 그대로 두고, 대신 잘못 들어가 있던 /api/results의 리다이렉트를 제거했습니다(응답 중복 방지).
+
+정리: server.js에서 res.redirect(302, "/result") 제거
+확인: app.js는 투표 성공 시 /result로 이동 중
+서버가 실행 중이면 재시작 후 동작 확인해 주세요.
+
+1 file changed
+Undo
+
+Review
+server.js
++0
+-1
+투표 결과를 지워주세요
+
+
+투표 결과를 어디에서 지울까요?
+
+결과 페이지(/result)에서 결과 섹션 자체를 제거
+서버가 저장한 집계 데이터를 초기화(현재 투표 수 0으로 리셋)
+원하시는 옵션 번호만 알려주세요.
+
+2
+
+
+투표 데이터 초기화했습니다.
+data.json의 votes를 비우고 updatedAt을 null로 리셋했어요.
+
+1 file changed
+Undo
+
+Review
+data.json
++3
+-20
